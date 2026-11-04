@@ -3,237 +3,545 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Rodrigo Mella, full stack developer con enfoque visual, interfaces modernas y experiencia en desarrollo web." />
-  <title>Rodrigo Mella | Full Stack Developer</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Icons -->
+  <meta name="description" content="Rodrigo Mella Valenzuela — Desarrollador Full Stack & Diseñador Gráfico. Software con carácter, arquitecturas escalables y experiencias web editoriales.">
+  <meta name="author" content="Rodrigo Mella Valenzuela">
+  <meta name="theme-color" content="#050505">
+  <title>Rodrigo Mella | Full Stack Developer & UI/UX</title>
+
+  <!-- Favicon SVG con monograma RM -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050505'/><text x='50' y='66' font-size='46' font-family='sans-serif' font-weight='900' fill='%238B5CF6' text-anchor='middle'>RM</text></svg>">
+
+  <!-- Google Fonts: Archivo, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- CSS personalizado -->
+
+  <!-- Editorial Design System Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-  <div class="page-shell">
-    <header class="site-header" id="site-header">
-      <div class="header-inner">
-        <nav id="primary-nav" class="site-nav" aria-label="Navegación principal">
-          <a href="#sobre-mi" class="nav-link">Sobre Mí</a>
-          <a href="#proyectos" class="nav-link">Proyectos</a>
-          <a href="#skills" class="nav-link">Habilidades</a>
-          <a href="#contacto" class="nav-link">Contacto</a>
-        </nav>
+  <!-- Ambient Atmospheric Glows -->
+  <div class="ambient-glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow-bottom" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       1. Header / Navbar
+       ========================================================================= -->
+  <header class="site-header" id="site-header">
+    <div class="site-container nav-container">
+      <!-- Brand Logo -->
+      <a href="#inicio" class="brand-logo" aria-label="Ir al inicio">
+        <div class="brand-text">
+          <span class="brand-name">RODRIGO MELLA</span>
+          <span class="brand-role">FULL STACK DEVELOPER</span>
+        </div>
+      </a>
+
+      <!-- Center Status Pill -->
+      <div class="nav-center-meta">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>DISPONIBLE</span>
+        </div>
+        <span class="microcopy">SANTIAGO, CL / 2026</span>
       </div>
-    </header>
 
-    <main>
-<section class="hero" id="home">
-        <div class="container hero-grid">
-          <!-- COLUMNA IZQUIERDA (Botón JSON arriba, Título, Lead, Botones de Acción y Redes) -->
-          <div class="hero-copy reveal" style="--reveal-delay: 120ms;">
-            <button type="button" class="btn-json-trigger mb-3" id="json-trigger" aria-label="Abrir vista JSON">
-              <span class="pulse-dot"></span>
-              <i class="bi bi-code-slash"></i>
-              <span>developer.json</span>
-            </button>
+      <!-- Desktop Links -->
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#manifiesto" class="nav-item">01 // MANIFIESTO</a>
+        <a href="#proyectos" class="nav-item">02 // PROYECTOS</a>
+        <a href="#skills" class="nav-item">03 // HABILIDADES</a>
+        <a href="#sobre-mi" class="nav-item">04 // PERFIL</a>
+        <a href="#contacto" class="nav-item">05 // CONTACTO</a>
+      </nav>
 
-            <h1>
-              Rodrigo <span>Mella</span><br>
-              Desarrollador<br>
-              <span>Full Stack</span>
+      <!-- Mobile Hamburger Toggle -->
+      <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Abrir menú de navegación">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <span class="brand-name">RODRIGO MELLA</span>
+      </div>
+      <button type="button" class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="drawer-links">
+      <a href="#inicio" class="drawer-link">
+        <span class="drawer-num">00</span>
+        <span>INICIO</span>
+      </a>
+      <a href="#manifiesto" class="drawer-link">
+        <span class="drawer-num">01</span>
+        <span>MANIFIESTO</span>
+      </a>
+      <a href="#proyectos" class="drawer-link">
+        <span class="drawer-num">02</span>
+        <span>PROYECTOS</span>
+      </a>
+      <a href="#skills" class="drawer-link">
+        <span class="drawer-num">03</span>
+        <span>HABILIDADES</span>
+      </a>
+      <a href="#sobre-mi" class="drawer-link">
+        <span class="drawer-num">04</span>
+        <span>PERFIL</span>
+      </a>
+      <a href="#contacto" class="drawer-link">
+        <span class="drawer-num">05</span>
+        <span>CONTACTO</span>
+      </a>
+    </div>
+
+    <div class="drawer-footer">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>DISPONIBLE</span>
+      </div>
+      <span class="microcopy">CHILE / 2026</span>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- =========================================================================
+         2. Hero Section
+         ========================================================================= -->
+    <section class="hero-section" id="inicio">
+      <div class="site-container hero-container">
+        <!-- 3-Column Micro Meta Grid -->
+        <div class="hero-meta-top">
+          <div class="meta-item">
+            <span class="microcopy">[ DISCIPLINA DEL SISTEMA ]</span>
+            <span class="meta-value">INGENIERÍA & DISEÑO DIGITAL</span>
+          </div>
+          <div class="meta-item meta-center">
+            <span class="microcopy">[ UBICACIÓN / PERIODO ]</span>
+            <span class="meta-value">SANTIAGO, CHILE / 2026</span>
+          </div>
+          <div class="meta-item meta-right">
+            <span class="microcopy">[ DISPONIBILIDAD ]</span>
+            <span class="meta-value text-accent">ABIERTO A PROYECTOS</span>
+          </div>
+        </div>
+
+        <!-- Hero Main Composition -->
+        <div class="hero-main-composition">
+          <!-- Left: Monumental Headline Block -->
+          <div class="hero-headline-block">
+            <h1 class="hero-title">
+              <span class="title-line">RODRIGO</span>
+              <span class="title-line text-accent">MELLA.</span>
+              <span class="title-line title-sub">FULL STACK DEVELOPER</span>
             </h1>
-            <p class="hero-lead">
-              Ingeniero Informático y Diseñador Gráfico con interés en el desarrollo web, enfocado en crear experiencias digitales modernas y funcionales.
+          </div>
+
+          <!-- Right: Hero Aside -->
+          <div class="hero-aside">
+            <div class="aside-badge">
+              <span class="badge-index">[ 00 — IDENTIDAD ]</span>
+            </div>
+            <p class="aside-lead">INGENIERO INFORMÁTICO + DISEÑADOR GRÁFICO</p>
+            <p class="aside-desc">
+              Desarrollo sistemas web full-stack de alto rendimiento combinando Django, Node.js, React y bases de datos relacionales, diseñados con rigor arquitectónico y sensibilidad visual.
             </p>
 
-            <div class="hero-actions">
-              <button type="button" class="btn-primary" data-download-cv>Descargar CV</button>
-              <a href="#contacto" class="btn-secondary">Contacto</a>
-            </div>
-
-            <div class="hero-social">
-              <a href="https://github.com/rodrigo-mellav" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visita mi GitHub">
-                <i class="bi bi-github"></i>
+            <div class="hero-actions-row">
+              <a href="#proyectos" class="btn-editorial">
+                <span>VER PROYECTOS</span>
+                <i class="bi bi-arrow-down-right"></i>
               </a>
-              <a href="https://www.linkedin.com/in/rodrigoamellav" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visita mi LinkedIn">
-                <i class="bi bi-linkedin"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- COLUMNA DERECHA (Ventana JSON desplegable) -->
-          <div class="hero-json-slot">
-            <div class="hero-json-overlay" id="json-overlay">
-              <div class="code-card-header">
-                <div class="code-dots">
-                  <span class="dot dot-red" id="close-json-btn"></span>
-                  <span class="dot dot-yellow"></span>
-                  <span class="dot dot-green"></span>
-                </div>
-                <span class="code-card-title">developer.json</span>
-                <button type="button" class="json-close-x" id="close-json-x"><i class="bi bi-x-lg"></i></button>
-              </div>
-              <div class="code-card-body">
-                <span class="code-keyword">const</span> <span class="code-variable">developer</span> = {<br>
-                &nbsp;&nbsp;name: <span class="code-string">'Rodrigo Mella Valenzuela'</span>,<br>
-                &nbsp;&nbsp;role: <span class="code-string">'Full Stack Developer'</span>,<br>
-                &nbsp;&nbsp;location: <span class="code-string">'Santiago, Chile'</span>,<br>
-                &nbsp;&nbsp;education: <span class="code-string">'Ingeniería Informática & Diseño Gráfico'</span>,<br>
-                &nbsp;&nbsp;languages: [<span class="code-string">'Python'</span>, <span class="code-string">'JavaScript'</span>, <span class="code-string">'SQL'</span>],<br>
-                &nbsp;&nbsp;webTechnologies: [<span class="code-string">'HTML5'</span>, <span class="code-string">'CSS3'</span>, <span class="code-string">'Bootstrap'</span>],<br>
-                &nbsp;&nbsp;frameworks: [<span class="code-string">'Django'</span>, <span class="code-string">'React'</span>, <span class="code-string">'Node.js'</span>],<br>
-                &nbsp;&nbsp;database: [<span class="code-string">'MySQL'</span>, <span class="code-string">'MongoDB'</span>, <span class="code-string">'SQLite'</span>],<br>
-                &nbsp;&nbsp;dataAnalytics: [<span class="code-string">'Power BI'</span>, <span class="code-string">'Excel'</span>],<br>
-                &nbsp;&nbsp;devOpsTools: [<span class="code-string">'Git/GitHub'</span>, <span class="code-string">'Azure DevOps'</span>],<br>
-                &nbsp;&nbsp;cloudPlatform: [<span class="code-string">'AWS'</span>],<br>
-                &nbsp;&nbsp;availableForHire: <span class="code-keyword">true</span><br>
-                };
-              </div>
+              <button type="button" class="btn-editorial-outline" data-download-cv>
+                <span>DESCARGAR CV</span>
+                <i class="bi bi-download"></i>
+              </button>
+              <button type="button" class="btn-json-pill" data-open-json aria-label="Inspeccionar developer.json">
+                <i class="bi bi-code-slash text-accent"></i>
+                <span>developer.json</span>
+              </button>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="sobre-mi" class="section-block reveal">
-        <div class="container">
-          <div class="section-heading section-heading--center">
-            <span class="section-kicker">&lt;about me/&gt;</span>
-            <h2>Sobre mí</h2>
-            <p>Full Stack Developer que integra ingeniería de software, bases de datos y diseño gráfico para construir productos web eficientes, limpios y atractivos.</p>
-          </div>
-
-          <div id="about-grid" class="about-grid"><!-- about cards rendered from assets/js/cards.js -->
-          </div>
-        </div>
-      </section>
-
-      <section id="proyectos" class="section-block reveal">
-        <div class="container">
-          <div class="section-heading section-heading--center">
-            <span class="section-kicker">&lt;projects /&gt;</span>
-            <h2>Proyectos que he desarrollado</h2>
-            <p>Una selección de proyectos donde pongo en práctica mis habilidades en desarrollo web y diseño digital.</p>
-          </div>
-          <div id="projects-grid" class="projects-grid"></div>
-        </div>
-      </section>
-
-      <section id="skills" class="section-block reveal">
-        <div class="container">
-          <div class="section-heading section-heading--center">
-            <span class="section-kicker">&lt;skills /&gt;</span>
-            <h2>Conocimientos técnicos</h2>
-            <p>Herramientas y tecnologías donde he desarrollado mayor experiencia práctica.</p>
-          </div>
-          <div id="skills-grid" class="skills-grid"></div>
-        </div>
-      </section>
-
-      <section id="contacto" class="section-block reveal">
-        <div class="container contact-shell">
-          <div class="section-heading section-heading--center">
-            <span class="section-kicker">&lt;contact /&gt;</span>
-            <h2>Envíame un mensaje</h2>
-            <p>Escríbeme y me pondré en contacto contigo lo antes posible</p>
-          </div>
-
-          <p id="contact-status" class="contact-status" aria-live="polite"></p>
-
-          <form id="contact-form" class="glass-card contact-form contact-form--solo" action="https://formspree.io/f/xeedqzvd" method="POST">
-            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
-            <label>
-              Nombre
-              <input type="text" name="name" placeholder="Tu nombre" required />
-            </label>
-            <label>
-              Correo
-              <input type="email" name="email" placeholder="tu@ejemplo.com" required />
-            </label>
-            <label>
-              Mensaje
-              <textarea name="message" rows="5" placeholder="Tu mensaje" required></textarea>
-            </label>
-            <button type="submit" class="btn-primary btn-primary--full">Enviar mensaje</button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <p>Rodrigo Mella · Desarrollador Full Stack</p>
-        <div class="footer-social">
-          <a href="https://github.com/rodrigo-mellav" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Visita mi GitHub">
-            <i class="bi bi-github"></i>
+        <!-- Hero Bottom Bar -->
+        <div class="hero-bottom-bar">
+          <a href="#manifiesto" class="scroll-action">
+            <i class="bi bi-arrow-down scroll-arrow text-accent"></i>
+            <span>DESPLAZAR PARA EXPLORAR PROYECTOS SELECCIONADOS</span>
           </a>
-          <a href="https://www.linkedin.com/in/rodrigoamellav" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Visita mi LinkedIn">
-            <i class="bi bi-linkedin"></i>
-          </a>
+          <span class="microcopy">[ SCROLL DOWN ]</span>
         </div>
-        <a href="#home" class="back-to-top" data-back-to-top aria-label="Volver arriba">
-          <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. Section 01: Statement / Manifiesto
+         ========================================================================= -->
+    <section class="statement-section" id="manifiesto">
+      <div class="site-container">
+        <!-- Editorial Header -->
+        <div class="section-editorial-header">
+          <div class="header-left-col">
+            <span class="microcopy">[ 01 — MANIFIESTO ]</span>
+            <span class="editorial-tag">FILOSOFÍA PRINCIPAL</span>
+          </div>
+          <div class="editorial-number">01</div>
+        </div>
+
+        <!-- Giant Quotation -->
+        <div class="statement-quote-box">
+          <h2 class="statement-quote">
+            "ME INTERESA EL ESPACIO ENTRE EL <span class="quote-accent">CÓDIGO</span> Y LA <span class="quote-accent">EXPERIENCIA</span> VISUAL."
+          </h2>
+        </div>
+
+        <!-- 2 Architectural Pillars -->
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div>
+              <div class="pillar-top">
+                <span class="microcopy">[ PILAR 01 ]</span>
+                <span class="pillar-num">// INGENIERÍA</span>
+              </div>
+              <h3 class="pillar-title">ARQUITECTURA RIGUROSA</h3>
+              <p class="pillar-desc" style="margin-top: 1rem;">
+                Modelado relacional estricto en MySQL y SQLite, APIs REST con Django, Node.js y Express, seguridad por capas, modularidad desacoplada y persistencia de datos orientada al rendimiento.
+              </p>
+            </div>
+            <div class="pillar-techs">
+              <span class="editorial-tag">PYTHON / DJANGO</span>
+              <span class="editorial-tag">NODE.JS / EXPRESS</span>
+              <span class="editorial-tag">SQL & MONGODB</span>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div>
+              <div class="pillar-top">
+                <span class="microcopy">[ PILAR 02 ]</span>
+                <span class="pillar-num">// CREATIVIDAD</span>
+              </div>
+              <h3 class="pillar-title">CRAFT VISUAL & UI</h3>
+              <p class="pillar-desc" style="margin-top: 1rem;">
+                Formación en Diseño Gráfico aplicada al desarrollo frontend en React y CSS3 moderno. Composiciones de alto contraste, tipografía editorial pesada, accesibilidad e interacciones fluidas.
+              </p>
+            </div>
+            <div class="pillar-techs">
+              <span class="editorial-tag">REACT / VITE</span>
+              <span class="editorial-tag">ADOBE PHOTOSHOP</span>
+              <span class="editorial-tag">UI/UX RESPONSIVE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. Section 02: Proyectos Seleccionados
+         ========================================================================= -->
+    <section class="projects-section" id="proyectos">
+      <div class="site-container">
+        <!-- Editorial Header -->
+        <div class="section-editorial-header">
+          <div class="header-left-col">
+            <span class="microcopy">[ 02 — TRABAJOS SELECCIONADOS ]</span>
+            <h2 class="title-section">
+              PROYECTOS <span class="text-accent">SELECCIONADOS.</span>
+            </h2>
+            <p class="microcopy text-light-gray" style="margin-top: 0.5rem;">
+              [ CASOS DE ESTUDIO ARQUITECTÓNICOS CON DESPLIEGUE Y CÓDIGO FUENTE ]
+            </p>
+          </div>
+          <div class="editorial-number">02</div>
+        </div>
+
+        <!-- Projects Stack (Rendered dynamically via cards.js) -->
+        <div class="projects-stack" id="projects-container"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. Section 03: Habilidades / Capacidades Técnicas
+         ========================================================================= -->
+    <section class="tech-section" id="skills">
+      <div class="site-container">
+        <!-- Editorial Header -->
+        <div class="section-editorial-header">
+          <div class="header-left-col">
+            <span class="microcopy">[ 03 — CAPACIDADES TÉCNICAS ]</span>
+            <h2 class="title-section">
+              STACK <span class="text-accent">DE TECNOLOGÍAS.</span>
+            </h2>
+          </div>
+          <div class="editorial-number">03</div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="tech-filter-bar">
+          <button type="button" class="filter-btn active" data-skill-filter="all">TODOS</button>
+          <button type="button" class="filter-btn" data-skill-filter="frontend">FRONTEND</button>
+          <button type="button" class="filter-btn" data-skill-filter="backend">BACKEND & DATABASES</button>
+          <button type="button" class="filter-btn" data-skill-filter="tools">DESIGN & TOOLS</button>
+        </div>
+
+        <!-- Tech Poster Wall Grid (Rendered dynamically) -->
+        <div class="tech-poster-wall" id="skills-wall"></div>
+
+        <!-- Bottom Statement Banner -->
+        <div class="tech-footer-statement">
+          <div>
+            <span class="microcopy">[ DISCIPLINA SOBRE ATAJOS ]</span>
+            <p class="microcopy text-white" style="margin-top: 0.25rem;">
+              Dominio de stacks modernos (React, Django, Node.js, SQL), código limpio, rendimiento medible y sin librerías innecesarias.
+            </p>
+          </div>
+          <button type="button" class="btn-editorial-outline" data-open-json>
+            <span>VER DEVELOPER.JSON</span>
+            <i class="bi bi-braces"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. Section 04: Perfil y Trayectoria / Sobre Mí
+         ========================================================================= -->
+    <section class="about-section" id="sobre-mi">
+      <div class="site-container">
+        <!-- Editorial Header -->
+        <div class="section-editorial-header">
+          <div class="header-left-col">
+            <span class="microcopy">[ 04 — PERFIL Y TRAYECTORIA ]</span>
+            <h2 class="title-section">
+              SOBRE <span class="text-accent">MI.</span>
+            </h2>
+          </div>
+          <div class="editorial-number">04</div>
+        </div>
+
+        <!-- 2-Column Dossier Grid -->
+        <div class="about-main-grid">
+          <!-- Left: Dossier Card -->
+          <div class="dossier-card">
+            <div>
+              <span class="microcopy">[ FICHA TÉCNICA // PERFIL ]</span>
+              <h3 class="spread-title" style="margin-top: 0.5rem;">RODRIGO MELLA</h3>
+              <p class="microcopy text-accent">INGENIERO INFORMÁTICO & DISEÑADOR GRÁFICO</p>
+            </div>
+
+            <div class="dossier-rows-table">
+              <div class="dossier-row">
+                <span class="microcopy">NOMBRE</span>
+                <span class="dossier-val">Rodrigo Mella Valenzuela</span>
+              </div>
+              <div class="dossier-row">
+                <span class="microcopy">CARRERA</span>
+                <span class="dossier-val">Ingeniería Informática & Diseño Gráfico</span>
+              </div>
+              <div class="dossier-row">
+                <span class="microcopy">UBICACIÓN</span>
+                <span class="dossier-val">Santiago, Chile</span>
+              </div>
+              <div class="dossier-row">
+                <span class="microcopy">FILOSOFÍA</span>
+                <span class="dossier-val text-accent">SOFTWARE CON CARÁCTER</span>
+              </div>
+              <div class="dossier-row">
+                <span class="microcopy">DISPONIBILIDAD</span>
+                <span class="dossier-val">Proyectos Full Stack & UI/UX</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-editorial" data-download-cv>
+              <span>DESCARGAR CURRÍCULUM PDF</span>
+              <i class="bi bi-file-earmark-pdf"></i>
+            </button>
+          </div>
+
+          <!-- Right: 4 Disciplines Focus Cards -->
+          <div class="disciplines-stack" id="about-disciplines"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. Section 05: Colaboración y Contacto
+         ========================================================================= -->
+    <section class="contact-section" id="contacto">
+      <div class="site-container">
+        <!-- Editorial Header -->
+        <div class="section-editorial-header">
+          <div class="header-left-col">
+            <span class="microcopy">[ 05 — COLABORACIONES Y CONTACTO ]</span>
+          </div>
+          <div class="editorial-number">05</div>
+        </div>
+
+        <!-- Giant Contact Title Arena -->
+        <div class="contact-headline-arena">
+          <h2 class="contact-title-giant">
+            CONSTRUYAMOS ALGO <span class="text-accent">ÚTIL.</span>
+          </h2>
+        </div>
+
+        <!-- 2-Column Contact Grid -->
+        <div class="contact-grid">
+          <!-- Left: Direct Channels & Copy Email -->
+          <div class="contact-channels-col">
+            <!-- One-Click Copy Email Pill -->
+            <button type="button" class="copy-email-btn" id="copy-email-btn" aria-label="Copiar correo electrónico">
+              <div class="copy-email-left">
+                <span class="microcopy" id="copy-feedback">COPIAR CORREO DIRECTO:</span>
+                <span class="email-address">rodrigoamellav@gmail.com</span>
+              </div>
+              <i class="bi bi-copy text-accent" style="font-size: 1.4rem;"></i>
+            </button>
+
+            <!-- Channels -->
+            <a href="https://github.com/rodrigo-mellav" target="_blank" rel="noopener noreferrer" class="channel-card">
+              <div>
+                <span class="microcopy">[ CÓDIGO FUENTE ]</span>
+                <h3 class="ch-title">GITHUB</h3>
+                <span class="ch-handle">github.com/rodrigo-mellav</span>
+              </div>
+              <i class="bi bi-arrow-up-right ch-arrow"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/rodrigoamellav" target="_blank" rel="noopener noreferrer" class="channel-card">
+              <div>
+                <span class="microcopy">[ RED PROFESIONAL ]</span>
+                <h3 class="ch-title">LINKEDIN</h3>
+                <span class="ch-handle">linkedin.com/in/rodrigoamellav</span>
+              </div>
+              <i class="bi bi-arrow-up-right ch-arrow"></i>
+            </a>
+
+            <div class="channel-card">
+              <div>
+                <span class="microcopy">[ DISPONIBILIDAD ]</span>
+                <h3 class="ch-title">PRESENCIAL / HÍBRIDO / REMOTO</h3>
+                <span class="ch-handle">SANTIAGO, CHILE</span>
+              </div>
+              <span class="status-dot"></span>
+            </div>
+          </div>
+
+          <!-- Right: Editorial Form -->
+          <div class="contact-form-col">
+            <span class="microcopy">[ ENVÍA UN MENSAJE DIRECTO ]</span>
+            <div id="contact-status-banner" class="contact-status-banner" role="status"></div>
+
+            <form id="contact-form" class="editorial-form" action="https://formspree.io/f/xeedqzvd" method="POST">
+              <input type="hidden" name="_subject" value="Nuevo contacto desde el portafolio editorial" />
+              
+              <div class="form-field">
+                <label for="form-name" class="microcopy">NOMBRE COMPLETO *</label>
+                <input type="text" id="form-name" name="name" class="form-input" placeholder="Tu nombre" required autocomplete="name" />
+              </div>
+
+              <div class="form-field">
+                <label for="form-email" class="microcopy">CORREO ELECTRÓNICO *</label>
+                <input type="email" id="form-email" name="email" class="form-input" placeholder="tu@empresa.com" required autocomplete="email" />
+              </div>
+
+              <div class="form-field">
+                <label for="form-message" class="microcopy">DETALLES DEL PROYECTO O CONSULTA *</label>
+                <textarea id="form-message" name="message" class="form-textarea" rows="4" placeholder="Dejame tu mensaje" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-editorial" style="width: 100%; justify-content: center;">
+                <span>ENVIAR MENSAJE</span>
+                <i class="bi bi-send"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       8. Site Footer (Editorial Metadata Bar)
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-top">
+        <div>
+          <h2 class="footer-brand-title">RODRIGO MELLA VALENZUELA</h2>
+          <p class="footer-tagline">DESARROLLADOR FULL STACK & DISEÑADOR GRÁFICO — SANTIAGO, CHILE</p>
+        </div>
+        <a href="#inicio" class="btn-editorial-outline" aria-label="Volver arriba">
+          <span>VOLVER ARRIBA</span>
+          <i class="bi bi-arrow-up"></i>
         </a>
       </div>
-    </footer>
-  </div>
 
-  <!-- Modales para ver imágenes en grande -->
-  <div class="modal fade" id="imageModal-0" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content modal-dark">
-        <div class="modal-body">
-          <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Cerrar"><i class="bi bi-x-lg"></i></button>
-          <img src="" alt="Imagen del proyecto" class="modal-image">
-          <button class="modal-carousel-nav modal-prev" aria-label="Imagen anterior">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-          <button class="modal-carousel-nav modal-next" aria-label="Imagen siguiente">
-            <i class="bi bi-chevron-right"></i>
-          </button>
+      <div class="footer-bottom">
+        <span class="microcopy text-gray">© 2026 RODRIGO MELLA. TODOS LOS DERECHOS RESERVADOS.</span>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       9. Developer JSON Terminal Modal
+       ========================================================================= -->
+  <div class="json-modal-backdrop" id="developer-json-modal" aria-hidden="true" role="dialog">
+    <div class="json-terminal-card" onclick="event.stopPropagation();">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="dot-btn dot-red" data-close-json></span>
+          <span class="dot-btn dot-yellow"></span>
+          <span class="dot-btn dot-green"></span>
         </div>
+        <span class="terminal-title">developer.json — Rodrigo Mella</span>
+        <button type="button" class="microcopy text-gray" data-close-json style="cursor: pointer;">[ CERRAR ESC ]</button>
+      </div>
+
+      <div class="terminal-body">
+        <span class="code-keyword">const</span> <span class="code-variable">developer</span> = {<br>
+        &nbsp;&nbsp;name: <span class="code-string">'Rodrigo Mella Valenzuela'</span>,<br>
+        &nbsp;&nbsp;role: <span class="code-string">'Full Stack Developer & Graphic Designer'</span>,<br>
+        &nbsp;&nbsp;location: <span class="code-string">'Santiago, Chile (GMT-3)'</span>,<br>
+        &nbsp;&nbsp;education: <span class="code-string">'Ingeniería Informática & Diseño Gráfico'</span>,<br>
+        &nbsp;&nbsp;corePhilosophy: <span class="code-string">'Software con carácter y precisión visual'</span>,<br>
+        &nbsp;&nbsp;languages: [<span class="code-string">'Python'</span>, <span class="code-string">'JavaScript (ES6+)'</span>, <span class="code-string">'SQL'</span>, <span class="code-string">'HTML5'</span>, <span class="code-string">'CSS3'</span>],<br>
+        &nbsp;&nbsp;frameworksAndLibs: [<span class="code-string">'React'</span>, <span class="code-string">'Django'</span>, <span class="code-string">'Node.js'</span>, <span class="code-string">'Express'</span>, <span class="code-string">'Bootstrap 5'</span>],<br>
+        &nbsp;&nbsp;databases: [<span class="code-string">'MySQL'</span>, <span class="code-string">'MongoDB'</span>, <span class="code-string">'SQLite'</span>],<br>
+        &nbsp;&nbsp;visualAndDesign: [<span class="code-string">'Adobe Photoshop'</span>, <span class="code-string">'Adobe Illustrator'</span>, <span class="code-string">'UI/UX Responsive'</span>],<br>
+        &nbsp;&nbsp;analyticsAndDevOps: [<span class="code-string">'Power BI'</span>, <span class="code-string">'Git & GitHub'</span>, <span class="code-string">'Azure DevOps'</span>],<br>
+        &nbsp;&nbsp;availableForProjects: <span class="code-keyword">true</span><br>
+        };
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="imageModal-1" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content modal-dark">
-        <div class="modal-body">
-          <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Cerrar"><i class="bi bi-x-lg"></i></button>
-          <img src="" alt="Imagen del proyecto" class="modal-image">
-          <button class="modal-carousel-nav modal-prev" aria-label="Imagen anterior">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-          <button class="modal-carousel-nav modal-next" aria-label="Imagen siguiente">
-            <i class="bi bi-chevron-right"></i>
-          </button>
-        </div>
-      </div>
+  <!-- =========================================================================
+       10. Fullscreen Image Zoom Modal
+       ========================================================================= -->
+  <div class="image-zoom-backdrop" id="image-zoom-modal" aria-hidden="true" role="dialog">
+    <div class="image-zoom-container">
+      <button type="button" class="zoom-close-btn" id="zoom-close-btn" aria-label="Cerrar vista en grande">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <img src="" alt="Captura ampliada del proyecto" class="image-zoom-img" id="image-zoom-target" />
     </div>
   </div>
 
-  <div class="modal fade" id="imageModal-2" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content modal-dark">
-        <div class="modal-body">
-          <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Cerrar"><i class="bi bi-x-lg"></i></button>
-          <img src="" alt="Imagen del proyecto" class="modal-image">
-          <button class="modal-carousel-nav modal-prev" aria-label="Imagen anterior">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-          <button class="modal-carousel-nav modal-next" aria-label="Imagen siguiente">
-            <i class="bi bi-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./assets/js/cards.js"></script>
-  <script src="./assets/js/function.js"></script>
-
+  <!-- Scripts -->
+  <script src="assets/js/cards.js"></script>
+  <script src="assets/js/function.js"></script>
 </body>
 </html>

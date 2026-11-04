@@ -1,3 +1,8 @@
+/* ==========================================================================
+   RODRIGO MELLA — EDITORIAL PORTFOLIO FUNCTIONS
+   ========================================================================== */
+
+// 1. Descargar CV
 function descargarCV() {
     const link = document.createElement('a');
     link.href = 'archivos/cv rodrigo mella.pdf';
@@ -7,625 +12,488 @@ function descargarCV() {
     link.remove();
 }
 
-const skillCategoryMeta = {
-    'Frontend': {
-        type: 'frontend',
-        badge: 'Client & UI',
-        subtitle: 'Interfaces dinámicas, responsivas y accesibles'
-    },
-    'Backend & Database': {
-        type: 'backend',
-        badge: 'Server & Data',
-        subtitle: 'Arquitectura de servidores, APIs y gestión de datos'
-    },
-    'Design & Tools': {
-        type: 'tools',
-        badge: 'Design & Flow',
-        subtitle: 'Diseño visual, control de versiones y analítica'
+// 2. Reloj digital en tiempo real (Santiago de Chile, GMT-3)
+function updateLocalClock() {
+    const clockEl = document.getElementById('footer-clock');
+    if (!clockEl) return;
+    
+    try {
+        const now = new Date();
+        const options = {
+            timeZone: 'America/Santiago',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        const formatter = new Intl.DateTimeFormat('es-CL', options);
+        clockEl.textContent = formatter.format(now);
+    } catch (e) {
+        const now = new Date();
+        clockEl.textContent = now.toTimeString().split(' ')[0];
     }
-};
+}
 
-const skillTechMeta = {
-    'HTML': { icon: 'bi-filetype-html', color: '#e34f26' },
-    'CSS': { icon: 'bi-filetype-css', color: '#264de4' },
-    'JavaScript': { icon: 'bi-filetype-js', color: '#f7df1e' },
-    'React': { svg: `<svg class="tech-svg-icon" viewBox="0 0 115.3 100" width="16" height="16" fill="currentColor"><ellipse cx="57.65" cy="50" rx="16.7" ry="43.4" transform="matrix(0.866 -0.5 0.5 0.866 -17.3 35.65)" fill="none" stroke="currentColor" stroke-width="6"/><ellipse cx="57.65" cy="50" rx="16.7" ry="43.4" transform="matrix(0.866 0.5 -0.5 0.866 32.7 -20.65)" fill="none" stroke="currentColor" stroke-width="6"/><ellipse cx="57.65" cy="50" rx="43.4" ry="16.7" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="57.65" cy="50" r="7.5" fill="currentColor"/></svg>`, color: '#61dafb' },
-    'Bootstrap': { icon: 'bi-bootstrap-fill', color: '#7952b3' },
-    'Python': { icon: 'bi-filetype-py', color: '#3776ab' },
-    'Django': { icon: 'bi-hdd-network-fill', color: '#2ba36c' },
-    'Node.js': { icon: 'bi-diagram-2-fill', color: '#68a063' },
-    'SQL': { icon: 'bi-filetype-sql', color: '#00758f' },
-    'MongoDB': { icon: 'bi-database-fill-gear', color: '#13aa52' },
-    'Adobe Photoshop': { icon: 'bi-image-fill', color: '#31a8ff' },
-    'Adobe Illustrator': { icon: 'bi-vector-pen', color: '#ff9a00' },
-    'Power BI': { icon: 'bi-bar-chart-fill', color: '#f2c811' },
-    'Git': { icon: 'bi-git', color: '#f05032' }
-};
+// 3. Renderizado de Proyectos (Monumental Spreads con Carrusel Integrado)
+const carouselStates = {};
 
-function createSkillCard(skill) {
-    const meta = skillCategoryMeta[skill.title] || {
-        type: 'default',
-        badge: 'Stack',
-        subtitle: 'Herramientas y tecnologías'
+function createProjectSpread(project, index) {
+    const spread = document.createElement('article');
+    spread.className = 'project-spread';
+    spread.id = `project-${index}`;
+
+    carouselStates[index] = {
+        currentIndex: 0,
+        images: project.images
     };
-    const count = skill.items ? skill.items.length : 0;
-    const article = document.createElement('article');
-    article.className = `skill-card skill-card--${meta.type} reveal`;
-    article.tabIndex = 0;
-    article.setAttribute('role', 'region');
-    article.setAttribute('aria-label', `${skill.title} - ${count} tecnologías`);
-    
-    article.innerHTML = `
-        <div class="skill-card-top-line"></div>
-        <div class="skill-card-head">
-            <div class="skill-icon"><i class="bi ${skill.icon}"></i></div>
-            <div class="skill-head-info">
-                <span class="skill-category-badge">${meta.badge}</span>
-                <h3>${skill.title}</h3>
-                <p class="skill-subtitle">${meta.subtitle}</p>
-            </div>
-        </div>
 
-        <div class="skill-card-footer">
-            <div class="skill-dropdown-arrow" aria-hidden="true">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-
-        <div class="skill-drawer">
-            <div class="skill-drawer-inner">
-                <div class="skill-chips-grid">
-                    ${skill.items.map((item) => {
-                        const tech = skillTechMeta[item];
-                        let iconHtml = '<i class="bi bi-code-slash"></i>';
-                        let techColor = 'var(--accent)';
-                        if (tech) {
-                            techColor = tech.color;
-                            iconHtml = tech.svg ? tech.svg : `<i class="bi ${tech.icon}"></i>`;
-                        }
-                        return `
-                            <div class="skill-chip" style="--tech-color: ${techColor};">
-                                <span class="skill-chip-icon">${iconHtml}</span>
-                                <span class="skill-chip-name">${item}</span>
-                            </div>
-                        `;
-                    }).join('')}
+    spread.innerHTML = `
+        <!-- Columna Izquierda: Visual Stage & Carrusel -->
+        <div class="spread-visual-stage">
+            <div class="project-carousel-container" data-carousel="${index}">
+                <div class="project-carousel-track">
+                    ${project.images.map((img, i) => `
+                        <img 
+                            src="${img}" 
+                            alt="${project.title} - Captura ${i + 1}"
+                            class="carousel-slide-img ${i === 0 ? 'is-active' : ''}"
+                            data-project="${index}"
+                            data-img-index="${i}"
+                        />
+                    `).join('')}
                 </div>
+                ${project.images.length > 1 ? `
+                    <button class="carousel-btn carousel-prev" data-carousel-prev="${index}" aria-label="Imagen anterior">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn carousel-next" data-carousel-next="${index}" aria-label="Imagen siguiente">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                ` : ''}
             </div>
+
+            <!-- Indicadores -->
+            ${project.images.length > 1 ? `
+                <div class="carousel-indicators-bar" data-indicators="${index}">
+                    ${project.images.map((_, i) => `
+                        <span class="indicator-dot ${i === 0 ? 'active' : ''}" data-dot-project="${index}" data-dot-index="${i}"></span>
+                    `).join('')}
+                </div>
+            ` : ''}
         </div>
-    `;
 
-    // Soporte táctil en móviles para abrir con tap y soporte para accesibilidad
-    article.addEventListener('click', () => {
-        if (window.innerWidth <= 992) {
-            article.classList.toggle('is-open');
-        }
-    });
+        <!-- Columna Derecha: Specs & Contenido Editorial -->
+        <div class="spread-copy-stage">
+            <div>
+                <div class="spread-meta-top">
+                    <span class="microcopy">[ PROYECTO // ${project.number} ]</span>
+                    <span class="editorial-tag">${project.badge}</span>
+                </div>
+                <h3 class="spread-title">${project.title}</h3>
+                <p class="spread-subtitle">${project.subtitle}</p>
+                <p class="spread-desc">${project.description}</p>
+            </div>
 
-    article.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            article.classList.toggle('is-open');
-        }
-    });
-
-    return article;
-}
-
-function formatCardLabel(value) {
-    if (!value) return '';
-
-    return value
-        .toString()
-        .trim()
-        .replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function getProjectStatusTone(status) {
-    const normalized = (status || '').toString().toLowerCase();
-
-    if (normalized.includes('live') || normalized.includes('activo')) {
-        return 'live';
-    }
-
-    if (normalized.includes('complete') || normalized.includes('complet')) {
-        return 'complete';
-    }
-
-    if (normalized.includes('develop') || normalized.includes('desarrollo')) {
-        return 'development';
-    }
-
-    return 'default';
-}
-
-function createProjectCard(project, index) {
-    const carouselId = `carousel-${index}`;
-    const modalId = `imageModal-${index}`;
-    const article = document.createElement('article');
-    article.className = 'project-card reveal';
-    const statusLabel = formatCardLabel(project.status || 'En progreso');
-    const statusTone = getProjectStatusTone(project.status);
-    
-    const hasMultipleImages = project.images && project.images.length > 1;
-    
-    article.innerHTML = `
-        <div class="project-surface">
-            <div class="project-visual">
-                <span class="project-badge">${project.badge}</span>
-                
-                <!-- Carrusel Mini -->
-                <div class="project-carousel" data-carousel-id="${carouselId}">
-                    <div class="carousel-images">
-                        ${project.images.map((img, i) => `
-                            <img 
-                                src="${img}" 
-                                alt="${project.title} - Imagen ${i + 1}"
-                                class="carousel-image ${i === 0 ? 'active' : ''}"
-                                data-image-index="${i}"
-                                data-modal-id="${modalId}"
-                                style="cursor: pointer;"
-                            >
-                        `).join('')}
+            <!-- Specs Grid -->
+            <div class="spread-specs-grid">
+                ${project.stats.map(s => `
+                    <div class="spec-cell">
+                        <span class="microcopy">${s.label}</span>
+                        <span class="spec-value">${s.value}</span>
                     </div>
-                    ${hasMultipleImages ? `
-                        <button class="carousel-nav carousel-prev" data-carousel-id="${carouselId}" aria-label="Imagen anterior">
-                            <i class="bi bi-chevron-left"></i>
-                        </button>
-                        <button class="carousel-nav carousel-next" data-carousel-id="${carouselId}" aria-label="Imagen siguiente">
-                            <i class="bi bi-chevron-right"></i>
-                        </button>
-                        
-                        <div class="carousel-indicators">
-                            ${project.images.map((_, i) => `
-                                <button 
-                                    class="indicator ${i === 0 ? 'active' : ''}" 
-                                    data-carousel-id="${carouselId}"
-                                    data-slide="${i}"
-                                    aria-label="Ir a imagen ${i + 1}"
-                                ></button>
-                            `).join('')}
-                        </div>
-                    ` : ''}
-                </div>
-
-                <div class="project-actions">
-                    <a class="project-action-btn" href="${project.github}" target="_blank" rel="noopener noreferrer" aria-label="Ver código de ${project.title}">
-                        <i class="bi bi-github" aria-hidden="true"></i>
-                    </a>
-                </div>
+                `).join('')}
             </div>
-            
-            <div class="project-copy">
-                <div class="project-meta-row">
-                    <span class="project-index">${project.metric}</span>
-                    <span class="project-status project-status--${statusTone}">${statusLabel}</span>
-                </div>
-                <h3>${project.title}</h3>
-                <p class="project-description">${project.description}</p>
-                <p class="project-summary">${project.summary}</p>
-                <div class="project-tech">
-                    ${project.technologies.map((technology) => `<span>${technology}</span>`).join('')}
-                </div>
+
+            <!-- Tech Pills -->
+            <div class="spread-tech-row">
+                ${project.technologies.map(t => `<span class="editorial-tag">${t}</span>`).join('')}
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="spread-actions-row">
+                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn-editorial">
+                    <span>CÓDIGO FUENTE</span>
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+                <button type="button" class="btn-editorial-outline" data-zoom-trigger="${index}">
+                    <span>VER CAPTURAS</span>
+                    <i class="bi bi-zoom-in"></i>
+                </button>
             </div>
         </div>
     `;
-    
-    return article;
-}
 
-function createAboutCard(item) {
-    const article = document.createElement('article');
-    article.className = 'about-card glass-card reveal';
-    article.innerHTML = `
-        <div class="about-card-head">
-            <div class="about-icon"><i class="bi ${item.icon}"></i></div>
-            <h3>${item.title}</h3>
-        </div>
-        <p>${item.text}</p>
-    `;
-    return article;
-}
-
-function renderAbout() {
-    const container = document.getElementById('about-grid');
-    if (!container) return;
-    container.innerHTML = '';
-    if (!Array.isArray(cardsData.about)) return;
-    cardsData.about.forEach((it, index) => {
-        const card = createAboutCard(it);
-        card.style.setProperty('--reveal-delay', `${index * 80}ms`);
-        container.appendChild(card);
-    });
-}
-
-function renderSkills() {
-    const container = document.getElementById('skills-grid');
-    if (!container) return;
-    container.innerHTML = '';
-    cardsData.skills.forEach((skill, index) => {
-        const card = createSkillCard(skill);
-        card.style.setProperty('--reveal-delay', `${index * 120}ms`);
-        container.appendChild(card);
-    });
+    return spread;
 }
 
 function renderProjects() {
-    const container = document.getElementById('projects-grid');
-    if (!container) return;
+    const container = document.getElementById('projects-container');
+    if (!container || !cardsData.projects) return;
     container.innerHTML = '';
-    // Mostrar solo las primeras 2 proyectos
-    cardsData.projects.slice(0, 2).forEach((project, index) => {
-        const card = createProjectCard(project, index);
-        card.style.setProperty('--reveal-delay', `${index * 140}ms`);
+    cardsData.projects.forEach((proj, i) => {
+        container.appendChild(createProjectSpread(proj, i));
+    });
+    setupCarousels();
+}
+
+function setupCarousels() {
+    // Manejo de botones prev y next
+    document.querySelectorAll('[data-carousel-prev]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const pIdx = btn.getAttribute('data-carousel-prev');
+            changeCarouselSlide(pIdx, -1);
+        });
+    });
+
+    document.querySelectorAll('[data-carousel-next]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const pIdx = btn.getAttribute('data-carousel-next');
+            changeCarouselSlide(pIdx, 1);
+        });
+    });
+
+    // Manejo de clicks en los dots
+    document.querySelectorAll('[data-dot-project]').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const pIdx = dot.getAttribute('data-dot-project');
+            const dIdx = parseInt(dot.getAttribute('data-dot-index'), 10);
+            setCarouselSlide(pIdx, dIdx);
+        });
+    });
+
+    // Clic en imagen para abrir zoom modal
+    document.querySelectorAll('.carousel-slide-img').forEach(img => {
+        img.addEventListener('click', () => {
+            openImageZoom(img.src);
+        });
+    });
+
+    // Botón Ver Capturas
+    document.querySelectorAll('[data-zoom-trigger]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const pIdx = btn.getAttribute('data-zoom-trigger');
+            const state = carouselStates[pIdx];
+            if (state && state.images.length) {
+                openImageZoom(state.images[state.currentIndex]);
+            }
+        });
+    });
+}
+
+function changeCarouselSlide(projectIndex, delta) {
+    const state = carouselStates[projectIndex];
+    if (!state) return;
+    let newIndex = state.currentIndex + delta;
+    if (newIndex < 0) newIndex = state.images.length - 1;
+    if (newIndex >= state.images.length) newIndex = 0;
+    setCarouselSlide(projectIndex, newIndex);
+}
+
+function setCarouselSlide(projectIndex, newIndex) {
+    const state = carouselStates[projectIndex];
+    if (!state) return;
+    state.currentIndex = newIndex;
+
+    const container = document.querySelector(`[data-carousel="${projectIndex}"]`);
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.carousel-slide-img');
+    slides.forEach((slide, idx) => {
+        slide.classList.toggle('is-active', idx === newIndex);
+    });
+
+    const indicators = document.querySelector(`[data-indicators="${projectIndex}"]`);
+    if (indicators) {
+        const dots = indicators.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === newIndex);
+        });
+    }
+}
+
+// 4. Modal Zoom de Imagen
+function setupImageZoomModal() {
+    const modal = document.getElementById('image-zoom-modal');
+    const closeBtn = document.getElementById('zoom-close-btn');
+    if (!modal) return;
+
+    const closeModal = () => modal.classList.remove('is-open');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+}
+
+function openImageZoom(imgSrc) {
+    const modal = document.getElementById('image-zoom-modal');
+    const zoomImg = document.getElementById('image-zoom-target');
+    if (!modal || !zoomImg) return;
+    zoomImg.src = imgSrc;
+    modal.classList.add('is-open');
+}
+
+// 5. Renderizado de Habilidades Técnicas (Tech Poster Wall)
+let currentSkillFilter = 'all';
+
+function renderSkills(filter = 'all') {
+    const container = document.getElementById('skills-wall');
+    if (!container || !cardsData.skills) return;
+
+    currentSkillFilter = filter;
+    container.innerHTML = '';
+
+    const filtered = filter === 'all' 
+        ? cardsData.skills 
+        : cardsData.skills.filter(s => s.category === filter);
+
+    filtered.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = 'tech-poster-item';
+        item.innerHTML = `
+            <div class="tech-item-header">
+                <span class="microcopy">${skill.categoryLabel}</span>
+                <span class="editorial-tag">${skill.tag}</span>
+            </div>
+            <div>
+                <h4 class="tech-item-name">${skill.name}</h4>
+                <p class="microcopy text-light-gray" style="margin-top: 0.4rem; text-transform: none;">${skill.desc}</p>
+            </div>
+            <div class="tech-item-footer">
+                <span class="microcopy text-gray">COMPETENCIA PRINCIPAL</span>
+                <span class="tech-dot"></span>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function setupSkillFilters() {
+    const buttons = document.querySelectorAll('[data-skill-filter]');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderSkills(btn.getAttribute('data-skill-filter'));
+        });
+    });
+}
+
+// 6. Renderizado de Sección Sobre Mí (Disciplinas)
+function renderAbout() {
+    const container = document.getElementById('about-disciplines');
+    if (!container || !cardsData.about) return;
+    container.innerHTML = '';
+
+    cardsData.about.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'discipline-card';
+        card.innerHTML = `
+            <div>
+                <span class="discipline-num">// ${item.num}</span>
+                <h4 class="discipline-title" style="margin-top: 0.5rem;">${item.title}</h4>
+            </div>
+            <p class="discipline-text">${item.text}</p>
+        `;
         container.appendChild(card);
     });
 }
 
-function setupDownloadButton() {
-    const downloadButton = document.querySelector('[data-download-cv]');
-    if (!downloadButton) return;
+// 7. Developer JSON Modal
+function setupJsonModal() {
+    const modal = document.getElementById('developer-json-modal');
+    const openBtns = document.querySelectorAll('[data-open-json]');
+    const closeBtns = document.querySelectorAll('[data-close-json]');
 
-    downloadButton.addEventListener('click', descargarCV);
+    if (!modal) return;
+
+    const openModal = () => modal.classList.add('is-open');
+    const closeModal = () => modal.classList.remove('is-open');
+
+    openBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
 }
 
-let contactStatusHideTimer = null;
-let contactStatusClearTimer = null;
+// 8. One-click Copy Email
+function setupCopyEmail() {
+    const btn = document.getElementById('copy-email-btn');
+    if (!btn) return;
 
-function showContactStatus(message, isError = false) {
-    const status = document.getElementById('contact-status');
-    if (!status) return;
-
-    window.clearTimeout(contactStatusHideTimer);
-    window.clearTimeout(contactStatusClearTimer);
-
-    status.textContent = message;
-    status.classList.add('is-visible');
-    status.classList.toggle('is-error', isError);
-
-    contactStatusHideTimer = window.setTimeout(() => {
-        status.classList.remove('is-visible', 'is-error');
-        contactStatusClearTimer = window.setTimeout(() => {
-            status.textContent = '';
-        }, 280);
-    }, 6000);
+    btn.addEventListener('click', async () => {
+        const email = 'rodrigoamellav@gmail.com';
+        try {
+            await navigator.clipboard.writeText(email);
+            const statusEl = document.getElementById('copy-feedback');
+            if (statusEl) {
+                const originalText = statusEl.textContent;
+                statusEl.textContent = '✓ COPIADO AL PORTAPAPELES';
+                statusEl.style.color = 'var(--accent)';
+                setTimeout(() => {
+                    statusEl.textContent = originalText;
+                    statusEl.style.color = '';
+                }, 3000);
+            }
+        } catch (err) {
+            window.location.href = `mailto:${email}`;
+        }
+    });
 }
 
-function setupContactStatus() {
-    const params = new URLSearchParams(window.location.search);
-    const sent = params.get('contact') === 'success';
+// 9. Navbar & Mobile Drawer
+function setupNavigation() {
+    const header = document.getElementById('site-header');
+    const drawer = document.getElementById('mobile-drawer');
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const closeDrawerBtn = document.getElementById('drawer-close-btn');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+    const navLinks = document.querySelectorAll('.nav-item');
 
-    if (sent) {
-        showContactStatus('Mensaje enviado. Te responderé pronto.');
+    // Sticky Header Scroll State
+    window.addEventListener('scroll', () => {
+        if (header) {
+            header.classList.toggle('is-scrolled', window.scrollY > 30);
+        }
+        highlightActiveSection();
+    });
+
+    // Mobile Drawer Toggles
+    if (toggleBtn && drawer) {
+        toggleBtn.addEventListener('click', () => {
+            drawer.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    const closeDrawer = () => {
+        if (drawer) {
+            drawer.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
+    // Smooth section scrolling with header offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || !targetId.startsWith('#')) return;
+
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                const offset = 80;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = targetEl.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    function highlightActiveSection() {
+        const sections = ['inicio', 'manifiesto', 'proyectos', 'skills', 'sobre-mi', 'contacto'];
+        const scrollPosition = window.scrollY + 140;
+
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    link.classList.toggle('active', href === `#${id}`);
+                });
+            }
+        });
     }
 }
 
+// 10. Formulario de Contacto Formspree
 function setupContactForm() {
     const form = document.getElementById('contact-form');
-    if (!form) return;
+    const statusBanner = document.getElementById('contact-status-banner');
+    if (!form || !statusBanner) return;
 
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.innerHTML : '';
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton ? submitButton.textContent : '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>ENVIANDO...</span> <i class="bi bi-arrow-repeat"></i>`;
+        }
 
         try {
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Enviando...';
-            }
-
             const formData = new FormData(form);
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
 
             if (response.ok) {
                 form.reset();
-                showContactStatus('Mensaje enviado con éxito. Te responderé pronto.');
+                statusBanner.textContent = '✓ Mensaje enviado con éxito. Me pondré en contacto contigo a la brevedad.';
+                statusBanner.className = 'contact-status-banner is-visible is-success';
             } else {
-                throw new Error('Error en la respuesta del servidor');
+                throw new Error('Error al enviar mensaje');
             }
         } catch (error) {
-            console.error('Error al enviar:', error);
-            showContactStatus('No se pudo enviar el mensaje. Intenta de nuevo.', true);
+            statusBanner.textContent = '⚠ Error al enviar. Por favor contáctame directamente por correo o LinkedIn.';
+            statusBanner.className = 'contact-status-banner is-visible';
         } finally {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
             }
         }
     });
 }
 
-function setHeaderState() {
-    const header = document.getElementById('site-header');
-    if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 12);
-}
-
-function scrollToSection(targetId) {
-    if (!targetId || !targetId.startsWith('#')) return;
-    const targetSection = document.querySelector(targetId);
-    if (!targetSection) return;
-
-    const navbarOffset = 76;
-    const windowHeight = window.innerHeight;
-
-    // Tomamos el contenedor interior donde comienza el contenido real
-    const container = targetSection.querySelector('.container') || targetSection;
-    const containerRect = container.getBoundingClientRect();
-    const containerTop = containerRect.top + window.scrollY;
-    const containerHeight = container.offsetHeight;
-
-    let targetScrollY;
-
-    // Si el contenido cabe dentro de la ventana (ej. Sobre Mí, Habilidades, Contacto)
-    if (containerHeight < windowHeight - navbarOffset) {
-        // Se centra perfectamente en la pantalla disponible
-        targetScrollY = containerTop - navbarOffset - ((windowHeight - navbarOffset) - containerHeight) / 2;
-    } else {
-        // Si el contenido es más alto (ej. Proyectos), se alinea para que el kicker y el heading
-        // comiencen cómodamente justo debajo del navbar flotante y las tarjetas se vean completas
-        targetScrollY = containerTop - navbarOffset - 14;
-    }
-
-    window.scrollTo({
-        top: Math.max(0, Math.round(targetScrollY)),
-        behavior: 'smooth'
-    });
-
-    if (window.history && window.history.pushState) {
-        window.history.pushState(null, '', targetId);
-    }
-}
-
-function setupNavigation() {
-    const nav = document.getElementById('primary-nav');
-    if (!nav) return;
-
-    const sections = ['sobre-mi', 'proyectos', 'skills', 'contacto']
-        .map((id) => document.getElementById(id))
-        .filter(Boolean);
-
-    const navLinks = nav.querySelectorAll('.nav-link');
-
-    // Clic con scroll centrado e inteligente
-    navLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            scrollToSection(href);
-        });
-    });
-
-    // Enlaces internos adicionales (ej. botón Contacto del hero)
-    document.querySelectorAll('.hero-actions a[href^="#"], a.btn-secondary[href^="#"]').forEach((link) => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            scrollToSection(href);
-        });
-    });
-
-    const updateActiveNav = () => {
-        const scrollPosition = window.scrollY + 160;
-        let currentSectionId = '';
-
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach((link) => {
-            const href = link.getAttribute('href');
-            if (href === `#${currentSectionId}`) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    };
-
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
-    updateActiveNav();
-}
-
-function setupBackToTop() {
-    const backToTop = document.querySelector('[data-back-to-top]');
-    if (!backToTop) return;
-
-    const updateVisibility = () => {
-        backToTop.classList.toggle('is-visible', window.scrollY > 280);
-    };
-
-    backToTop.addEventListener('click', (event) => {
-        event.preventDefault();
-        
-        // Remover clase 'show' de todos los elementos reveal
-        document.querySelectorAll('.reveal').forEach((element) => {
-            element.classList.remove('show');
-        });
-        
-        // Reiniciar observer
-        setupRevealObserver();
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    updateVisibility();
-    window.addEventListener('scroll', updateVisibility, { passive: true });
-}
-
-function setupRevealObserver() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.12,
-        rootMargin: '0px 0px -12% 0px'
-    });
-
-    document.querySelectorAll('.reveal').forEach((element) => {
-        observer.observe(element);
-    });
-}
-
-function goToCarouselSlide(carouselId, slideIndex) {
-    const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-    if (!carousel) return;
-    
-    const images = carousel.querySelectorAll('.carousel-image');
-    const indicators = carousel.querySelectorAll('.indicator');
-    
-    // Validar índice
-    slideIndex = (slideIndex + images.length) % images.length;
-    
-    // Actualizar imágenes
-    images.forEach((img, i) => {
-        img.classList.toggle('active', i === slideIndex);
-    });
-    
-    // Actualizar indicadores
-    indicators.forEach((ind, i) => {
-        ind.classList.toggle('active', i === slideIndex);
-    });
-}
-
-function initializeCarousels() {
-    // Navegación con flechas
-    document.querySelectorAll('.carousel-nav').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const carouselId = btn.dataset.carouselId;
-            const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-            const currentActive = carousel.querySelector('.carousel-image.active');
-            const images = carousel.querySelectorAll('.carousel-image');
-            const currentIndex = Array.from(images).indexOf(currentActive);
-            
-            const isNext = btn.classList.contains('carousel-next');
-            const newIndex = isNext ? currentIndex + 1 : currentIndex - 1;
-            
-            goToCarouselSlide(carouselId, newIndex);
-        });
-    });
-    
-    // Indicadores
-    document.querySelectorAll('.carousel-indicators .indicator').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const carouselId = btn.dataset.carouselId;
-            const slideIndex = parseInt(btn.dataset.slide);
-            goToCarouselSlide(carouselId, slideIndex);
-        });
-    });
-    
-    // Click en imagen para abrir modal
-    document.querySelectorAll('.carousel-image').forEach((img) => {
-        img.addEventListener('click', () => {
-            const modalId = img.dataset.modalId;
-            const modal = new bootstrap.Modal(document.getElementById(modalId));
-            
-            // Actualizar imagen del modal
-            const modalImage = document.querySelector(`#${modalId} .modal-image`);
-            const carouselId = img.closest('[data-carousel-id]').dataset.carouselId;
-            const images = img.closest('[data-carousel-id]').querySelectorAll('.carousel-image');
-            const imageIndex = Array.from(images).indexOf(img);
-            
-            if (modalImage) {
-                modalImage.src = img.src;
-                modalImage.dataset.currentIndex = imageIndex;
-                modalImage.dataset.carouselId = carouselId;
-            }
-            
-            modal.show();
-        });
-    });
-    
-    // Navegación en el modal
-    document.querySelectorAll('.modal-carousel-nav').forEach((btn) => {
-        btn.addEventListener('click', () => {
-            const modalImage = btn.closest('.modal-body').querySelector('.modal-image');
-            if (!modalImage) return;
-            
-            const carouselId = modalImage.dataset.carouselId;
-            const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-            const images = carousel.querySelectorAll('.carousel-image');
-            let currentIndex = parseInt(modalImage.dataset.currentIndex) || 0;
-            
-            const isNext = btn.classList.contains('modal-next');
-            currentIndex = isNext ? currentIndex + 1 : currentIndex - 1;
-            currentIndex = (currentIndex + images.length) % images.length;
-            
-            const newImage = images[currentIndex];
-            modalImage.src = newImage.src;
-            modalImage.dataset.currentIndex = currentIndex;
-        });
-    });
-}
-
+// Inicialización Global
 document.addEventListener('DOMContentLoaded', () => {
-    renderSkills();
-    renderAbout();
     renderProjects();
-    initializeCarousels();
-    setupDownloadButton();
-    setupContactStatus();
-    setupContactForm();
+    renderSkills('all');
+    setupSkillFilters();
+    renderAbout();
     setupNavigation();
-    setupBackToTop();
-    setupRevealObserver();
-    setHeaderState();
+    setupImageZoomModal();
+    setupJsonModal();
+    setupCopyEmail();
+    setupContactForm();
 
-    window.addEventListener('scroll', setHeaderState, { passive: true });
+    // Iniciar reloj local
+    updateLocalClock();
+    setInterval(updateLocalClock, 1000);
 
-    requestAnimationFrame(() => {
-        document.querySelectorAll('.hero .reveal').forEach((element) => {
-            element.classList.add('show');
-        });
+    // Botones de descarga de CV
+    document.querySelectorAll('[data-download-cv]').forEach(btn => {
+        btn.addEventListener('click', descargarCV);
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const jsonTrigger = document.getElementById('json-trigger');
-  const jsonOverlay = document.getElementById('json-overlay');
-  const closeBtn = document.getElementById('close-json-btn');
-  const closeX = document.getElementById('close-json-x');
-
-  if (jsonTrigger && jsonOverlay) {
-    // Abrir panel
-    jsonTrigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      jsonOverlay.classList.toggle('is-active');
-    });
-
-    // Cerrar desde los botones de la tarjeta
-    [closeBtn, closeX].forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          jsonOverlay.classList.remove('is-active');
-        });
-      }
-    });
-
-    // Cerrar si se hace clic fuera del panel
-    document.addEventListener('click', (e) => {
-      if (!jsonOverlay.contains(e.target) && !jsonTrigger.contains(e.target)) {
-        jsonOverlay.classList.remove('is-active');
-      }
-    });
-  }
 });
