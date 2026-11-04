@@ -41,22 +41,21 @@
         </div>
       </a>
 
-      <!-- Center Status Pill -->
+      <!-- Center Status Pill 
       <div class="nav-center-meta">
         <div class="status-pill">
           <span class="status-dot"></span>
           <span>DISPONIBLE</span>
         </div>
-        <span class="microcopy">SANTIAGO, CL / 2026</span>
       </div>
+      -->
 
       <!-- Desktop Links -->
       <nav class="nav-links" aria-label="Navegación principal">
-        <a href="#manifiesto" class="nav-item">01 // MANIFIESTO</a>
+        <a href="#sobre-mi" class="nav-item">01 // SOBRE MI</a>
         <a href="#proyectos" class="nav-item">02 // PROYECTOS</a>
         <a href="#skills" class="nav-item">03 // HABILIDADES</a>
-        <a href="#sobre-mi" class="nav-item">04 // PERFIL</a>
-        <a href="#contacto" class="nav-item">05 // CONTACTO</a>
+        <a href="#contacto" class="nav-item">04 // CONTACTO</a>
       </nav>
 
       <!-- Mobile Hamburger Toggle -->
@@ -84,9 +83,9 @@
         <span class="drawer-num">00</span>
         <span>INICIO</span>
       </a>
-      <a href="#manifiesto" class="drawer-link">
+      <a href="#sobre-mi" class="drawer-link">
         <span class="drawer-num">01</span>
-        <span>MANIFIESTO</span>
+        <span>SOBRE MI</span>
       </a>
       <a href="#proyectos" class="drawer-link">
         <span class="drawer-num">02</span>
@@ -96,12 +95,8 @@
         <span class="drawer-num">03</span>
         <span>HABILIDADES</span>
       </a>
-      <a href="#sobre-mi" class="drawer-link">
-        <span class="drawer-num">04</span>
-        <span>PERFIL</span>
-      </a>
       <a href="#contacto" class="drawer-link">
-        <span class="drawer-num">05</span>
+        <span class="drawer-num">04</span>
         <span>CONTACTO</span>
       </a>
     </div>
@@ -177,9 +172,9 @@
 
         <!-- Hero Bottom Bar -->
         <div class="hero-bottom-bar">
-          <a href="#manifiesto" class="scroll-action">
+          <a href="#sobre-mi" class="scroll-action">
             <i class="bi bi-arrow-down scroll-arrow text-accent"></i>
-            <span>DESPLAZAR PARA EXPLORAR PROYECTOS SELECCIONADOS</span>
+            <span>DESPLAZAR PARA EXPLORAR MI PERFIL</span>
           </a>
           <span class="microcopy">[ SCROLL DOWN ]</span>
         </div>
@@ -187,15 +182,15 @@
     </section>
 
     <!-- =========================================================================
-         3. Section 01: Statement / Manifiesto
+         3. Section 01: Sobre Mí
          ========================================================================= -->
-    <section class="statement-section" id="manifiesto">
+    <section class="statement-section" id="sobre-mi">
       <div class="site-container">
         <!-- Editorial Header -->
         <div class="section-editorial-header">
           <div class="header-left-col">
-            <span class="microcopy">[ 01 — MANIFIESTO ]</span>
-            <span class="editorial-tag">FILOSOFÍA PRINCIPAL</span>
+            <span class="microcopy">[ 01 — SOBRE MI ]</span>
+            <span class="editorial-tag">PERFIL</span>
           </div>
           <div class="editorial-number">01</div>
         </div>
@@ -207,44 +202,49 @@
           </h2>
         </div>
 
-        <!-- 2 Architectural Pillars -->
-        <div class="pillars-grid">
-          <div class="pillar-card">
+        <!-- Profile Dossier and Focus Cards -->
+        <div class="about-main-grid statement-profile">
+          <!-- Left: Dossier Card -->
+          <div class="dossier-card">
             <div>
-              <div class="pillar-top">
-                <span class="microcopy">[ PILAR 01 ]</span>
-                <span class="pillar-num">// INGENIERÍA</span>
+              <span class="microcopy">[ FICHA TÉCNICA // PERFIL ]</span>
+              <h3 class="spread-title" style="margin-top: 0.5rem;">RODRIGO MELLA</h3>
+              <p class="microcopy text-accent">INGENIERO INFORMÁTICO & DISEÑADOR GRÁFICO</p>
+            </div>
+
+            <div class="dossier-rows-table">
+              <div class="dossier-row">
+                <span class="microcopy">NOMBRE</span>
+                <span class="dossier-val">Rodrigo Mella Valenzuela</span>
               </div>
-              <h3 class="pillar-title">ARQUITECTURA RIGUROSA</h3>
-              <p class="pillar-desc" style="margin-top: 1rem;">
-                Modelado relacional estricto en MySQL y SQLite, APIs REST con Django, Node.js y Express, seguridad por capas, modularidad desacoplada y persistencia de datos orientada al rendimiento.
-              </p>
+              <div class="dossier-row">
+                <span class="microcopy">CARRERA</span>
+                <span class="dossier-val">Ingeniería Informática & Diseño Gráfico</span>
+              </div>
+              <div class="dossier-row">
+                <span class="microcopy">UBICACIÓN</span>
+                <span class="dossier-val">Santiago, Chile</span>
+              </div>
+              <!-- <div class="dossier-row">
+                <span class="microcopy">ENFOQUE</span>
+                <span class="dossier-val text-accent">Full Stack & Diseño</span>
+              </div>-->
+              <div class="dossier-row">
+                <span class="microcopy">DISPONIBILIDAD</span>
+                <span class="dossier-val">Inmediata</span>
+              </div>
             </div>
-            <div class="pillar-techs">
-              <span class="editorial-tag">PYTHON / DJANGO</span>
-              <span class="editorial-tag">NODE.JS / EXPRESS</span>
-              <span class="editorial-tag">SQL & MONGODB</span>
-            </div>
+
+            <button type="button" class="btn-editorial" data-download-cv>
+              <span>DESCARGAR CURRÍCULUM PDF</span>
+              <i class="bi bi-file-earmark-pdf"></i>
+            </button>
           </div>
 
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-top">
-                <span class="microcopy">[ PILAR 02 ]</span>
-                <span class="pillar-num">// CREATIVIDAD</span>
-              </div>
-              <h3 class="pillar-title">CRAFT VISUAL & UI</h3>
-              <p class="pillar-desc" style="margin-top: 1rem;">
-                Formación en Diseño Gráfico aplicada al desarrollo frontend en React y CSS3 moderno. Composiciones de alto contraste, tipografía editorial pesada, accesibilidad e interacciones fluidas.
-              </p>
-            </div>
-            <div class="pillar-techs">
-              <span class="editorial-tag">REACT / VITE</span>
-              <span class="editorial-tag">ADOBE PHOTOSHOP</span>
-              <span class="editorial-tag">UI/UX RESPONSIVE</span>
-            </div>
-          </div>
+          <!-- Right: Focus Cards -->
+          <div class="disciplines-stack" id="about-disciplines"></div>
         </div>
+
       </div>
     </section>
 
@@ -316,77 +316,16 @@
     </section>
 
     <!-- =========================================================================
-         6. Section 04: Perfil y Trayectoria / Sobre Mí
-         ========================================================================= -->
-    <section class="about-section" id="sobre-mi">
-      <div class="site-container">
-        <!-- Editorial Header -->
-        <div class="section-editorial-header">
-          <div class="header-left-col">
-            <span class="microcopy">[ 04 — PERFIL Y TRAYECTORIA ]</span>
-            <h2 class="title-section">
-              SOBRE <span class="text-accent">MI.</span>
-            </h2>
-          </div>
-          <div class="editorial-number">04</div>
-        </div>
-
-        <!-- 2-Column Dossier Grid -->
-        <div class="about-main-grid">
-          <!-- Left: Dossier Card -->
-          <div class="dossier-card">
-            <div>
-              <span class="microcopy">[ FICHA TÉCNICA // PERFIL ]</span>
-              <h3 class="spread-title" style="margin-top: 0.5rem;">RODRIGO MELLA</h3>
-              <p class="microcopy text-accent">INGENIERO INFORMÁTICO & DISEÑADOR GRÁFICO</p>
-            </div>
-
-            <div class="dossier-rows-table">
-              <div class="dossier-row">
-                <span class="microcopy">NOMBRE</span>
-                <span class="dossier-val">Rodrigo Mella Valenzuela</span>
-              </div>
-              <div class="dossier-row">
-                <span class="microcopy">CARRERA</span>
-                <span class="dossier-val">Ingeniería Informática & Diseño Gráfico</span>
-              </div>
-              <div class="dossier-row">
-                <span class="microcopy">UBICACIÓN</span>
-                <span class="dossier-val">Santiago, Chile</span>
-              </div>
-              <div class="dossier-row">
-                <span class="microcopy">FILOSOFÍA</span>
-                <span class="dossier-val text-accent">SOFTWARE CON CARÁCTER</span>
-              </div>
-              <div class="dossier-row">
-                <span class="microcopy">DISPONIBILIDAD</span>
-                <span class="dossier-val">Proyectos Full Stack & UI/UX</span>
-              </div>
-            </div>
-
-            <button type="button" class="btn-editorial" data-download-cv>
-              <span>DESCARGAR CURRÍCULUM PDF</span>
-              <i class="bi bi-file-earmark-pdf"></i>
-            </button>
-          </div>
-
-          <!-- Right: 4 Disciplines Focus Cards -->
-          <div class="disciplines-stack" id="about-disciplines"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         7. Section 05: Colaboración y Contacto
+         6. Section 04: Colaboración y Contacto
          ========================================================================= -->
     <section class="contact-section" id="contacto">
       <div class="site-container">
         <!-- Editorial Header -->
         <div class="section-editorial-header">
           <div class="header-left-col">
-            <span class="microcopy">[ 05 — COLABORACIONES Y CONTACTO ]</span>
+            <span class="microcopy">[ 04 — COLABORACIONES Y CONTACTO ]</span>
           </div>
-          <div class="editorial-number">05</div>
+          <div class="editorial-number">04</div>
         </div>
 
         <!-- Giant Contact Title Arena -->
@@ -453,12 +392,12 @@
 
               <div class="form-field">
                 <label for="form-email" class="microcopy">CORREO ELECTRÓNICO *</label>
-                <input type="email" id="form-email" name="email" class="form-input" placeholder="tu@empresa.com" required autocomplete="email" />
+                <input type="email" id="form-email" name="email" class="form-input" placeholder="tu@ejemplo.com" required autocomplete="email" />
               </div>
 
               <div class="form-field">
                 <label for="form-message" class="microcopy">DETALLES DEL PROYECTO O CONSULTA *</label>
-                <textarea id="form-message" name="message" class="form-textarea" rows="4" placeholder="Dejame tu mensaje" required></textarea>
+                <textarea id="form-message" name="message" class="form-textarea" rows="4" placeholder="Déjame tu mensaje" required></textarea>
               </div>
 
               <button type="submit" class="btn-editorial" style="width: 100%; justify-content: center;">

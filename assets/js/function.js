@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RODRIGO MELLA — EDITORIAL PORTFOLIO FUNCTIONS
+   RODRIGO MELLA — PORTFOLIO FUNCTIONS
    ========================================================================== */
 
 // 1. Descargar CV
@@ -286,6 +286,37 @@ function setupSkillFilters() {
     });
 }
 
+function setupScrollReveal() {
+    document.documentElement.classList.add('js-enabled');
+
+    const revealGroups = [
+        { selector: '.section-editorial-header, .statement-quote-box, .about-main-grid, .tech-filter-bar, .tech-footer-statement, .contact-headline-arena, .contact-grid' },
+        { selector: '.project-spread, .tech-poster-item, .discipline-card' }
+    ];
+    const elements = revealGroups.flatMap(group => [...document.querySelectorAll(group.selector)]);
+    const staggeredGroups = document.querySelectorAll('.project-spread, .tech-poster-item, .discipline-card');
+
+    elements.forEach(element => element.classList.add('scroll-animate'));
+    staggeredGroups.forEach((element, index) => {
+        element.style.setProperty('--reveal-delay', `${(index % 8) * 100}ms`);
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        elements.forEach(element => element.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            currentObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+
+    elements.forEach(element => observer.observe(element));
+}
+
 // 6. Renderizado de Sección Sobre Mí (Disciplinas)
 function renderAbout() {
     const container = document.getElementById('about-disciplines');
@@ -415,7 +446,7 @@ function setupNavigation() {
     });
 
     function highlightActiveSection() {
-        const sections = ['inicio', 'manifiesto', 'proyectos', 'skills', 'sobre-mi', 'contacto'];
+        const sections = ['inicio', 'sobre-mi', 'proyectos', 'skills', 'contacto'];
         const scrollPosition = window.scrollY + 140;
 
         sections.forEach(id => {
@@ -482,6 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSkills('all');
     setupSkillFilters();
     renderAbout();
+    setupScrollReveal();
     setupNavigation();
     setupImageZoomModal();
     setupJsonModal();
