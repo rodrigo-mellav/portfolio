@@ -36,6 +36,10 @@ function updateLocalClock() {
 
 // 3. Renderizado de Proyectos (Monumental Spreads con Carrusel Integrado)
 const carouselStates = {};
+const imageZoomState = {
+    projectIndex: null,
+    currentIndex: 0
+};
 
 function createProjectSpread(project, index) {
     const spread = document.createElement('article');
@@ -166,7 +170,9 @@ function setupCarousels() {
     // Clic en imagen para abrir zoom modal
     document.querySelectorAll('.carousel-slide-img').forEach(img => {
         img.addEventListener('click', () => {
-            openImageZoom(img.src);
+            const projectIndex = img.getAttribute('data-project');
+            const imageIndex = parseInt(img.getAttribute('data-img-index'), 10);
+            openImageZoom(projectIndex, imageIndex);
         });
     });
 
@@ -176,7 +182,7 @@ function setupCarousels() {
             const pIdx = btn.getAttribute('data-zoom-trigger');
             const state = carouselStates[pIdx];
             if (state && state.images.length) {
-                openImageZoom(state.images[state.currentIndex]);
+                openImageZoom(pIdx, state.currentIndex);
             }
         });
     });
@@ -217,27 +223,68 @@ function setCarouselSlide(projectIndex, newIndex) {
 function setupImageZoomModal() {
     const modal = document.getElementById('image-zoom-modal');
     const closeBtn = document.getElementById('zoom-close-btn');
+    const prevBtn = document.getElementById('zoom-prev-btn');
+    const nextBtn = document.getElementById('zoom-next-btn');
     if (!modal) return;
 
-    const closeModal = () => modal.classList.remove('is-open');
+    const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+    };
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (prevBtn) prevBtn.addEventListener('click', () => changeZoomImage(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => changeZoomImage(1));
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        if (!modal.classList.contains('is-open')) return;
+        if (e.key === 'Escape') {
             closeModal();
         }
+        if (e.key === 'ArrowLeft') changeZoomImage(-1);
+        if (e.key === 'ArrowRight') changeZoomImage(1);
     });
 }
 
-function openImageZoom(imgSrc) {
+function openImageZoom(projectIndex, imageIndex) {
     const modal = document.getElementById('image-zoom-modal');
     const zoomImg = document.getElementById('image-zoom-target');
-    if (!modal || !zoomImg) return;
-    zoomImg.src = imgSrc;
+    const state = carouselStates[projectIndex];
+    if (!modal || !zoomImg || !state || !state.images.length) return;
+
+    imageZoomState.projectIndex = projectIndex;
+    imageZoomState.currentIndex = imageIndex;
+    updateZoomImage();
     modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+}
+
+function changeZoomImage(delta) {
+    if (imageZoomState.projectIndex === null) return;
+
+    const state = carouselStates[imageZoomState.projectIndex];
+    if (!state || state.images.length < 2) return;
+
+    let newIndex = imageZoomState.currentIndex + delta;
+    if (newIndex < 0) newIndex = state.images.length - 1;
+    if (newIndex >= state.images.length) newIndex = 0;
+    imageZoomState.currentIndex = newIndex;
+    updateZoomImage();
+}
+
+function updateZoomImage() {
+    const zoomImg = document.getElementById('image-zoom-target');
+    const prevBtn = document.getElementById('zoom-prev-btn');
+    const nextBtn = document.getElementById('zoom-next-btn');
+    const state = carouselStates[imageZoomState.projectIndex];
+    if (!zoomImg || !state) return;
+
+    zoomImg.src = state.images[imageZoomState.currentIndex];
+    const hasMultipleImages = state.images.length > 1;
+    if (prevBtn) prevBtn.hidden = !hasMultipleImages;
+    if (nextBtn) nextBtn.hidden = !hasMultipleImages;
 }
 
 // 5. Renderizado de Habilidades Técnicas (Tech Poster Wall)

@@ -9,115 +9,127 @@ const cardsData = {
         github: 'https://github.com/rodrigo-mellav',
         linkedin: 'https://www.linkedin.com/in/rodrigoamellav',
         discipline: 'Ingeniería Informática & Diseño Gráfico',
-        availability: 'Disponible para proyectos'
+        availability: 'Disponible'
     },
-    skills: [
-        {
-            category: 'frontend',
-            categoryLabel: 'FRONTEND',
-            name: 'React',
-            tag: 'LIBRARY / SPA',
-            desc: 'Componentes reactivos modulares, hooks y estado dinámico'
-        },
-        {
-            category: 'frontend',
-            categoryLabel: 'FRONTEND',
-            name: 'JavaScript',
-            tag: 'ES6+ / CORE',
-            desc: 'Manipulación asíncrona del DOM, Fetch API y lógica cliente'
-        },
-        {
-            category: 'frontend',
-            categoryLabel: 'FRONTEND',
-            name: 'HTML5 & CSS3',
-            tag: 'MARKUP & STYLES',
-            desc: 'Semántica web estricta, Flexbox, Grid y animaciones'
-        },
-        {
-            category: 'frontend',
-            categoryLabel: 'FRONTEND',
-            name: 'Bootstrap 5',
-            tag: 'FRAMEWORK',
-            desc: 'Sistemas de grillas responsivas y componentes utilitarios'
-        },
-        {
-            category: 'backend',
-            categoryLabel: 'BACKEND & DATABASES',
-            name: 'Python',
-            tag: 'LANGUAGE',
-            desc: 'Desarrollo backend robusto, automatización y scripting'
-        },
-        {
-            category: 'backend',
-            categoryLabel: 'BACKEND & DATABASES',
-            name: 'Django',
-            tag: 'FRAMEWORK',
-            desc: 'Arquitectura MVC/MVT, ORM, autenticación y APIs REST'
-        },
-        {
-            category: 'backend',
-            categoryLabel: 'BACKEND & DATABASES',
-            name: 'Node.js & Express',
-            tag: 'RUNTIME & API',
-            desc: 'Servicios de servidor ligeros y enrutamiento REST'
-        },
-        {
-            category: 'backend',
-            categoryLabel: 'BACKEND & DATABASES',
-            name: 'SQL & MySQL',
-            tag: 'RELATIONAL DB',
-            desc: 'Modelado relacional, consultas complejas e integridad ACID'
-        },
-        {
-            category: 'backend',
-            categoryLabel: 'BACKEND & DATABASES',
-            name: 'MongoDB',
-            tag: 'NOSQL DB',
-            desc: 'Almacenamiento orientado a documentos y colecciones BSON'
-        },
-        {
-            category: 'tools',
-            categoryLabel: 'DESIGN & TOOLS',
-            name: 'Adobe Illustrator',
-            tag: 'VECTOR & BRANDING',
-            desc: 'Diseño vectorial, iconografía SVG y tipografía'
-        },
-        {
-            category: 'tools',
-            categoryLabel: 'DESIGN & TOOLS',
-            name: 'Adobe Photoshop',
-            tag: 'VISUAL DESIGN',
-            desc: 'Composición digital, retoque y preparación de assets UI'
-        },
-        {
-            category: 'tools',
-            categoryLabel: 'DESIGN & TOOLS',
-            name: 'Power BI',
-            tag: 'DATA ANALYTICS',
-            desc: 'Modelado analítico de datos y paneles visuales de negocio'
-        },
-        {
-            category: 'tools',
-            categoryLabel: 'DESIGN & TOOLS',
-            name: 'Git & GitHub',
-            tag: 'VERSION CONTROL',
-            desc: 'Control de versiones branching y colaboración en equipo'
-        },
-        {
-            category: 'tools',
-            categoryLabel: 'DESIGN & TOOLS',
-            name: 'Azure DevOps',
-            tag: 'CI/CD & DEVOPS',
-            desc: 'Gestión de proyectos, repositorios y pipelines de despliegue'
-        }
-    ],
+skills: [
+    // FRONTEND
+    {
+        category: 'frontend',
+        categoryLabel: 'FRONTEND',
+        name: 'REACT',
+        tag: 'LIBRARY / SPA',
+        desc: 'Componentes reactivos modulares, hooks y estado dinámico'
+    },
+    {
+        category: 'frontend',
+        categoryLabel: 'FRONTEND',
+        name: 'JAVASCRIPT',
+        tag: 'ES6+ / CORE',
+        desc: 'Manipulación asíncrona del DOM, Fetch API y lógica cliente'
+    },
+    {
+        category: 'frontend',
+        categoryLabel: 'FRONTEND',
+        name: 'HTML5 & CSS3',
+        tag: 'MARKUP & STYLES',
+        desc: 'Semántica web estricta, Flexbox, Grid y animaciones'
+    },
+    {
+        category: 'frontend',
+        categoryLabel: 'FRONTEND',
+        name: 'BOOTSTRAP 5',
+        tag: 'FRAMEWORK',
+        desc: 'Sistemas de grillas responsivas y componentes utilitarios'
+    },
+
+    // BACKEND & DATABASES
+    {
+        category: 'backend',
+        categoryLabel: 'BACKEND & DATABASES',
+        name: 'PYTHON',
+        tag: 'LANGUAGE',
+        desc: 'Desarrollo backend robusto, automatización y scripting'
+    },
+    {
+        category: 'backend',
+        categoryLabel: 'BACKEND & DATABASES',
+        name: 'DJANGO',
+        tag: 'FRAMEWORK',
+        desc: 'Arquitectura MVC/MVT, ORM, autenticación y APIs REST'
+    },
+    {
+        category: 'backend',
+        categoryLabel: 'BACKEND & DATABASES',
+        name: 'NODE.JS & EXPRESS',
+        tag: 'RUNTIME & API',
+        desc: 'Servicios de servidor ligeros y enrutamiento REST'
+    },
+    {
+        category: 'backend',
+        categoryLabel: 'BACKEND & DATABASES',
+        name: 'SQL & MYSQL',
+        tag: 'RELATIONAL DB',
+        desc: 'Modelado relacional, consultas complejas e integridad ACID'
+    },
+    {
+        category: 'backend',
+        categoryLabel: 'BACKEND & DATABASES',
+        name: 'MONGODB',
+        tag: 'NOSQL DB',
+        desc: 'Almacenamiento orientado a documentos y colecciones BSON'
+    },
+
+    // DESIGN & TOOLS
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'ADOBE ILLUSTRATOR',
+        tag: 'VECTOR & BRANDING',
+        desc: 'Diseño vectorial, iconografía SVG y tipografía'
+    },
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'ADOBE PHOTOSHOP',
+        tag: 'VISUAL DESIGN',
+        desc: 'Composición digital, retoque y preparación de assets UI'
+    },
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'ADOBE INDESIGN',
+        tag: 'EDITORIAL & LAYOUT',
+        desc: 'Diagramación de documentos, maquetación y jerarquía visual'
+    },
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'POWER BI',
+        tag: 'DATA ANALYTICS',
+        desc: 'Modelado analítico de datos y paneles visuales de negocio'
+    },
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'GIT & GITHUB',
+        tag: 'VERSION CONTROL',
+        desc: 'Control de versiones, branching y colaboración en código'
+    },
+    {
+        category: 'tools',
+        categoryLabel: 'DESIGN & TOOLS',
+        name: 'AZURE DEVOPS',
+        tag: 'AGILE & SPRINTS',
+        desc: 'Gestión de proyectos ágiles, tableros Kanban y seguimiento'
+    }
+],
     projects: [
         {
             number: '01',
             badge: 'FULL STACK / GAMING MARKETPLACE',
-            title: 'Game Store',
-            subtitle: 'PLATAFORMA E-COMMERCE DE DISTRIBUCIÓN DIGITAL',
-            description: 'Plataforma web de venta digital de videojuegos con autenticación simulada, catálogo dinámico interactivo con filtrado por plataformas y generación automatizada de claves de activación.',
+            title: 'GAME STORE',
+            subtitle: 'PLATAFORMA E-COMMERCE DE DISTRIBUCIÓN DIGITAL DE VIDEOJUEGOS',
+            description: 'Aplicación web full-stack para la exploración y simulación de compra de videojuegos. Cuenta con catálogo dinámico filtrable por plataforma/género, carrito con drawer lateral, autenticación de usuarios y backend en Node.js para procesamiento de ordenes.',
             images: [
                 'assets/img/gamestore.webp',
                 'assets/img/gamestore-2.webp', 
@@ -127,22 +139,22 @@ const cardsData = {
                 'assets/img/gamestore-6.webp',
                 'assets/img/gamestore-7.webp'
             ],
-            technologies: ['React', 'Vite', 'Node.js', 'Express', 'Bootstrap 5'],
+            technologies: ['REACT', 'VITE', 'NODE.JS', 'EXPRESS', 'NODEMAILER', 'BOOTSTRAP 5'],
             stats: [
-                { label: 'ARQUITECTURA', value: 'REST API + SPA' },
-                { label: 'FRONTEND', value: 'REACT / VITE' },
+                { label: 'ARQUITECTURA', value: 'CLIENT-SERVER / REST API + SPA' },
+                { label: 'FRONTEND', value: 'REACT / VITE / ROUTER' },
                 { label: 'BACKEND', value: 'NODE.JS / EXPRESS' },
-                { label: 'ENFOQUE', value: 'CATÁLOGO DINÁMICO' }
+                { label: 'ENFOQUE', value: 'CATÁLOGO DINÁMICO & E-COMMERCE' }
             ],
             github: 'https://github.com/rodrigo-mellav/game-store',
             demo: ''
         },
         {
             number: '02',
-            badge: 'FULL STACK / FINANCE DASHBOARD',
-            title: 'Expense Flow',
-            subtitle: 'DASHBOARD FINANCIERO & GESTIÓN DE PRESUPUESTOS',
-            description: 'Aplicación web integral para el control de gastos personales, visualización analítica de métricas financieras, balance mensual y establecimiento de metas de ahorro.',
+            badge: 'FULL STACK / FINANCIAL WEB APP',
+            title: 'EXPENSE FLOW',
+            subtitle: 'SISTEMA DE GESTIÓN DE FINANZAS PERSONALES & ANALÍTICA DE GASTOS',
+            description: 'Aplicación web para la gestión financiera personal. Permite registrar transacciones, establecer límites presupuestarios y monitorear metas de ahorro mediante paneles analíticos interactivos con Chart.js.',
             images: [
                 'assets/img/expenseflow-2.webp',
                 'assets/img/expenseflow.webp',
@@ -152,12 +164,12 @@ const cardsData = {
                 'assets/img/expenseflow-6.webp',
                 'assets/img/expenseflow-7.webp'
             ],
-            technologies: ['Django', 'Python', 'SQLite', 'Bootstrap', 'JavaScript'],
+            technologies: ['PYTHON', 'DJANGO', 'SQLITE', 'JAVASCRIPT', 'BOOTSTRAP 5', 'CHART.JS'],
             stats: [
-                { label: 'ARQUITECTURA', value: 'MVT + REST API' },
-                { label: 'BACKEND', value: 'PYTHON / DJANGO' },
-                { label: 'BASE DE DATOS', value: 'SQLITE / SQL' },
-                { label: 'ENFOQUE', value: 'ANALÍTICA DE GASTOS' }
+                { label: 'ARQUITECTURA', value: 'DJANGO MVT + JSON ENDPOINTS' },
+                { label: 'BACKEND', value: 'PYTHON 3 / DJANGO 5' },
+                { label: 'BASE DE DATOS', value: 'SQLITE3 / ORM DJANGO' },
+                { label: 'ENFOQUE', value: 'ANALÍTICA DE GASTOS & UI RESPONSIVA' }
             ],
             github: 'https://github.com/rodrigo-mellav/expense-flow',
             demo: ''
@@ -171,8 +183,8 @@ const cardsData = {
         },
         {
             num: '02',
-            title: 'Responsive Design & UX',
-            text: 'Diseño interfaces con sensibilidad editorial que se adaptan de manera impecable a cualquier resolución, priorizando la velocidad de carga, la jerarquía visual y la accesibilidad.'
+            title: 'Diseño Responsivo',
+            text: 'Diseño interfaces adaptables que ofrecen una experiencia fluida en cualquier dispositivo, priorizando la usabilidad, la velocidad de carga y la accesibilidad.'
         },
         {
             num: '03',

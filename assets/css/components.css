@@ -257,6 +257,10 @@
   will-change: transform;
 }
 
+.tech-poster-item:not(:nth-child(5n)) {
+  border-right: 1px solid rgba(139, 92, 246, 0.2);
+}
+
 .tech-poster-item:hover {
   background: #111111;
   transform: translateY(-5px);
@@ -844,6 +848,14 @@
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
 }
 
+.image-zoom-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
 .zoom-close-btn {
   position: absolute;
   top: -45px;
@@ -851,11 +863,43 @@
   width: 40px;
   height: 40px;
   border: 1px solid var(--border-strong);
-  color: var(--white);
+  color: var(--accent-hover);
   display: grid;
   place-items: center;
   cursor: pointer;
   background: rgba(5, 5, 5, 0.8);
+}
+
+.zoom-nav-btn {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent);
+  color: var(--accent-hover);
+  background: rgba(5, 5, 5, 0.85);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  z-index: 1;
+}
+
+.zoom-nav-btn:hover,
+.zoom-close-btn:hover {
+  color: var(--white);
+  border-color: var(--accent-hover);
+  background: var(--accent);
+}
+
+.zoom-prev-btn {
+  left: 1rem;
+}
+
+.zoom-next-btn {
+  right: 1rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -884,6 +928,22 @@
 }
 
 @media (max-width: 768px) {
+  .hero-headline-block {
+    transform: translateY(1rem);
+  }
+  .tech-poster-wall {
+    grid-template-columns: 1fr;
+  }
+  .tech-poster-item,
+  .tech-poster-item:not(:nth-child(5n)) {
+    border-right: none;
+  }
+  .tech-poster-item:not(:last-child) {
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  .tech-poster-item:last-child {
+    border-bottom: none;
+  }
   .hero-meta-top {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -904,6 +964,21 @@
 }
 
 @media (max-width: 480px) {
+  .zoom-nav-btn {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+  .zoom-prev-btn {
+    left: 0.75rem;
+  }
+  .zoom-next-btn {
+    right: 0.75rem;
+  }
+  .zoom-close-btn {
+    top: -3.5rem;
+    right: 0;
+  }
   .hero-actions-row {
     flex-direction: column;
     align-items: stretch;
